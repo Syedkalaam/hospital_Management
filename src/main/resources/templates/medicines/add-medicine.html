@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Add Medicine</title>
+  <link rel="stylesheet" href="/add-medicine.css">
+</head>
+<body>
+
+<br><br>
+
+<h1>Add Medicine for [[${patient.name}]]</h1>
+
+<form th:action="@{'/add/' + ${patient.id}}" th:object="${medicine}" method="post">
+  <label>Name:</label>
+  <input type="text" th:field="*{name}" required /><br/>
+  <label>Dosage:</label>
+  <input type="text" th:field="*{dosage}" required /><br/>
+  <label>Description:</label>
+  <input type="text" th:field="*{description}" required /><br/>
+  <label>ExpiryDate:</label>
+  <input type="text" th:field="*{expiryDate}" required /><br/>
+  <label>Choose Doctor:</label>
+  <select name="doctorId">
+    <option value="">-- Select Doctor --</option>
+    <option th:each="doctor : ${doctors}"
+            th:value="${doctor.id}"
+            th:text="${doctor.name}">
+    </option>
+  </select>
+  <button type="submit">Add Medicine</button>
+</form>
+
+
+
+</body>
+</html>

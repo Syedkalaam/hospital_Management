@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register Patient</title>
+    <link rel="stylesheet" href="/create.css">
+</head>
+<body>
+
+<br><br>
+<h1>Register Patient</h1>
+
+<form th:action="@{/create}" th:object="${patient}" method="post">
+    <label>Name: <input type="text" th:field="*{name}" /></label>
+    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
+    <label>Age: <input type="number" th:field="*{age}" /></label>
+    <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+
+    <label>Gender:
+        <select th:field="*{gender}">
+            <option value="">--Select--</option>
+            <option value="Male" th:selected="${patient.gender == 'Male'}">Male</option>
+            <option value="Female" th:selected="${patient.gender == 'Female'}">Female</option>
+            <option value="Other" th:selected="${patient.gender == 'Other'}">Other</option>
+        </select>
+    </label>
+    <div th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
+
+    <label>Contact Number: <input type="text" th:field="*{contactNumber}" /></label>
+    <div th:if="${#fields.hasErrors('contactNumber')}" th:errors="*{contactNumber}"></div>
+
+    <label>Address: <input type="text" th:field="*{address}" /></label>
+
+    <button type="submit">Save</button>
+</form>
+
+<a th:href="@{/patients}">Back to Patient List</a>
+
+
+
+
+</body>
+</html>

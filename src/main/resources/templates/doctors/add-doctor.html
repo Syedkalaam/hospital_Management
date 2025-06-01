@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Register Doctor</title>
+  <link rel="stylesheet" href="/add-doctor.css">
+</head>
+<body>
+
+<br><br>
+<h1>Register Doctor</h1>
+
+<form th:action="@{/add}" th:object="${doctor}" method="post">
+  <label>Doctor Name: <input type="text" th:field="*{name}" /></label>
+  <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
+  <label>Specialization: <input type="text" th:field="*{specialization}" /></label>
+  <div th:if="${#fields.hasErrors('specialization')}" th:errors="*{specialization}"></div>
+
+
+
+  <button type="submit">Save</button>
+</form>
+
+<a class="a" th:href="@{/doctors}">Back to Doctor List</a>
+
+
+
+
+</body>
+</html>

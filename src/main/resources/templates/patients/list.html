@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Patients</title>
+  <link rel="stylesheet" href="/patient-list.css">
+</head>
+<body>
+
+<br><br>
+<h1>Patients</h1>
+
+
+<a class="add" th:href="@{/create}">Add Patient</a>
+<table border="1">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Gender</th>
+    <th>Contact</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="patient : ${patients}">
+    <td th:text="${patient.name}"></td>
+    <td th:text="${patient.gender}"></td>
+    <td th:text="${patient.contactNumber}"></td>
+    <td>
+      <a class="a" th:href="@{/view/{id}(id=${patient.id})}">View</a> |
+      <a class="a" th:href="@{/edit/{id}(id=${patient.id})}">Edit</a> |
+      <a class="a" th:href="@{/add/{id}(id=${patient.id})}">Add Medicine</a> |
+      <a class="d" th:href="@{/delete/{id}(id=${patient.id})}" onclick="return confirm('Delete?')">Delete</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<a class="a" th:href="@{/}">Go to home</a>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Doctors</title>
+    <link rel="stylesheet" href="/doctor-list.css">
+</head>
+<body>
+
+<br><br>
+<h1>Doctors</h1>
+
+
+<a th:href="@{/add}">Add Doctors</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Doctor Name</th>
+        <th>specialization</th>
+        <th>Available</th>
+        <th>Patients</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="doc : ${doctors}">
+        <td th:text="${doc.name}"></td>
+        <td th:text="${doc.specialization}"></td>
+
+        <form th:action="@{/appointments/booking/{doctorId}(doctorId=${doc.id})}" th:object="${appointment}"
+              method="post">
+            <td>
+                <input type="datetime-local" name=dateandTime/>
+            </td>
+            <td>
+                <select name="patientId">
+                    <option value="">-- Select Patient --</option>
+                    <option th:each="patient : ${patients}"
+                            th:value="${patient.id}"
+                            th:text="${patient.name}">
+                    </option>
+                </select>
+            </td>
+
+            <td>
+                <button type="submit">Book</button>
+                <a th:href="@{/viewdoctor/{id}(id=${doc.id})}">View Doctor</a>
+                <a th:href="@{/doctor/delete/{id}(id=${doc.id})}" onclick="return confirm('Delete?')">Delete</a>
+
+            </td>
+
+        </form>
+
+    </tr>
+    </tbody>
+</table>
+<a class="a" th:href="@{/}">Go to home</a>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>View Doctor</title>
+  <link rel="stylesheet" href="/view-doctor.css">
+</head>
+<body>
+
+<br><br>
+<h1>Doctor Details</h1>
+
+<p><strong>Doctor Name :</strong> <span th:text="${doctor.name}"></span></p>
+<p><strong>Specialization :</strong> <span th:text="${doctor.specialization}"></span></p>
+
+
+
+<h2>Appointments </h2>
+<ul class="ul">
+  <li class="li" th:if="${#lists.isEmpty(doctor.appointments)}">No appointments found.</li>
+  <li class="li" th:each="appt : ${doctor.appointments}">
+    <span th:text="${appt.dateandTime}"></span> - Patient : <span th:text="${appt.patientName}"></span>
+    <a class="a" th:href="@{/appointments/delete/{appointmentIds}/{doctorId}(appointmentIds=${appt.appointmentIds}, doctorId=${appt.doctorId})}"
+       onclick="return confirm('Delete?')">Delete</a>
+  </li>
+</ul>
+
+
+<a class="a" th:href="@{/doctors}">Back to Doctors List</a>
+
+
+
+</body>
+</html>
